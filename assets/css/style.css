@@ -1,0 +1,128 @@
+﻿textarea{
+    resize: none;
+    outline:none;
+}
+img{
+    width:100%;
+}
+.table-container{
+    border: 1px solid #2700ff85;
+    border-radius: 4px;
+    padding: 45px;
+}
+.content{
+    margin-top: 50px;
+}
+.task-img-container{
+    margin-bottom: 20px;
+}
+.custom-file-label{
+    text-align: left;
+}
+.modal .image-body{
+    padding: 10px 0 0 30px;
+}
+.modal-footer{
+    justify-content: center;
+}
+#modal-task-body{
+    word-wrap: break-word;
+}
+#task-create{
+    display: none;
+}
+.nav-item{
+    padding: 0px 30px;
+}
+
+.nav-item:hover{
+    background-color: #17a2b8;
+}
+.nav-item:hover .nav-link{
+    color: #fff !important;
+
+}
+#create-button{
+    margin: 10px 0;
+}
+.task-create{
+    padding: 35px 15px;
+    background-color: #bab9f80a;
+}
+#task-image,.update-status{
+    cursor: pointer;
+}
+.task-text{
+    overflow: hidden;
+}
+textarea.task-text:focus{
+    outline: none;
+    border: none;
+}
+textarea.task-text-textarea{
+    overflow-y: scroll;
+    padding-right: 30px;
+    box-sizing: content-box;
+    border: none;
+    background-color: #f2ffff;
+}
+#update-text-form,.task-text, textarea.task-text-textarea{
+    height: 100%;
+    width: 100%;
+}
+.item-task-body{
+    min-height: 195px;
+}
+.task-table{
+    padding: 0 0 20px;
+}
+.task-text{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+.task-table-header{
+    padding: 20px 0;
+}
+.item-task-body>div{
+    border-right: 1px solid #15ff0e3b;
+    padding: 30px 15px;
+}
+.item-task-body>div.image{
+    padding-right: 2px ;
+    padding-left: 2px ;
+}
+.item-task-body>div:last-child{
+    border: none;
+}
+.task-table .row{
+    margin-right: 0;
+    margin-left: 0;
+}
+.save-btn{
+    position: absolute;
+    bottom: 1px;
+    padding: 0 .75rem;
+    right: 15px;
+}
+.disabled{
+    pointer-events: none;
+    color: #000;
+}
+.links-page li .disabled{
+    color: #000;
+    background: #c7bdbd;
+}
+.links-page li a{
+    color: #fff;
+    font-weight: bold;
+}
+.links-page li{
+    margin: 0 5px;
+}
+.links-page{
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+}
