@@ -5,7 +5,7 @@ class Model
 
    public function __construct()
    {
-		include $_SERVER['DOCUMENT_ROOT']."/application/database/dbconnect.php";
+		include "application/database/dbconnect.php";
 		$this->DBH = new PDO($dsn, $user, $pass, $opt);
    }
 
@@ -16,5 +16,8 @@ class Model
        }
        return $array;
 	}
-
+	
+	public function get_data()
+	{
+	}
 }

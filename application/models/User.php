@@ -28,9 +28,9 @@ class User extends model{
 
         # шифрование пароля
         if (!$errors){
-            $hash = password_hash($post['password'], PASSWORD_DEFAULT);
+            $hash = password_hash($post['password'], PASSWORD_ARGON2I);
             $in_user = $this->DBH->prepare("INSERT INTO `users`(`username`, `password`) VALUES (?, ?) ");
-            $in_user->execute([$post['username'], $hash]);
+            $in_user->execute([$post['username'],   $hash]);
             # авторизируем
             $sl_user = $this->DBH->prepare("SELECT `id`,`role` FROM `users` WHERE `username`=?");
             $sl_user->execute([$post['username']]);

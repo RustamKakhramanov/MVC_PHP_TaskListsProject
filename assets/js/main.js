@@ -1,60 +1,3 @@
-$(document).ready(function() {
-    var textBody;
-    var textContainer;
-    $(".task-text").on('click',function() {
-        var parent = $(this).closest('.item-task-body');
-        var id = $(parent).children('#id-task').html();
-       if(!$("#update-text-form").html()){
-            textBody = $(this).html();
-            $(this).html("<form id='update-text-form' method='post' action='/site/update-task-body' ><input type='hidden' name='id' value='"+id+"'><textarea name='body' id='bdt' class='task-text-textarea'>" + $(this).html() + "</textarea> <button type='button' onclick='updateTask($(this))' class='btn btn-primary save-btn'>Save</button> </form>");
-            textContainer = $('#update-text-form');
-            $("#update-text-form").children('#bdt').focus();
-        }
-    });
-    $(document).mouseup(function (e) {
-        if ($(textContainer).has(e.target).length === 0){
-            $(textContainer).closest('.task-text').html(textBody);
-        }
-    });
-        $('form').keydown(function(event){
-            if(event.keyCode == 13) {
-                event.preventDefault();
-                return false;
-            }
-        });
-});
-function updateTask(param){
-    var form =  $(param).closest('form'),
-        container = $(form).closest('.task-text'),
-        type = $(form).attr("method"),
-        url = $(form).attr("action"),
-        data = $(form).serialize();
-    $.ajax({
-        type: type,
-        data: data,
-        url:url,
-        success: function(data){
-           $(container).html(data);
-        }
-    });
-}
-$('.update-status').on('click',function() {
-    var data = $(this).html() == 'No completed'?2:1;
-    var parent = $(this).closest('.item-task-body');
-    var id = $(parent).children('#id-task').html();
-    $.ajax({
-        type: 'POST',
-        data:{
-            status: data,
-            id: id
-        } ,
-        url:'/site/update-task-body',
-        success: function(data){
-        }
-    });
-    $(this).html(data == 2?'Completed':'No completed');
-});
-
 $("#user-form").on("submit", function(e){
     e.preventDefault();
     var type = $(this).attr("method"),
@@ -179,8 +122,8 @@ function sorting(param) {
         success: function(data){
             data = JSON.parse(data);
             updateTableBody(data['tasks']);
+            $(container).attr('sort',sort == 'ASC'?'DESC':'ASC');
             addParameterToURL(sort,param);
-            $(container).attr('sort',sort== 'ASC'?'DESC':'ASC');
             updatePAgeLInks(1);
         }
     });
@@ -226,6 +169,7 @@ function getPage(param){
              if(sortname)
                 addParameterToURL(sort,sortname);
             updatePAgeLInks(data['currentPage']);
+            console.log(data['currentPage']);
         }
     });
 }
@@ -241,7 +185,6 @@ function updatePAgeLInks(currentPage){
     });
 }
 function addParameterToURL(sort,sortname){
-    console.log(sort);
     var page;
     var links = document.getElementsByClassName("db");
     $.each( links, function( i, val ) {
@@ -255,6 +198,21 @@ function addParameterToURL(sort,sortname){
             $(val).removeAttr('sortname');
             $(val).attr('sort',sort);
             $(val).attr('sortname',sortname);
+        }
+    });
+}
+function updateTask(param){
+    var form =  $(param).closest('form'),
+        container = $(form).closest('.task-text'),
+        type = $(form).attr("method"),
+        url = $(form).attr("action"),
+        data = $(form).serialize();
+    $.ajax({
+        type: type,
+        data: data,
+        url:url,
+        success: function(data){
+            $(container).html(data);
         }
     });
 }

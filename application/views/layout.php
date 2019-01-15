@@ -7,8 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
-    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,5 +31,36 @@
     <div class="container content">
         <?php include $_SERVER['DOCUMENT_ROOT'].'/application/views/'.$content_view; ?>
     </div>
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+    <script>
+        function taskText(text) {
+            var parent = $(text).closest('.item-task-body');
+            var id = $(parent).children('#id-task').html();
+            if(!$("#update-text-form").html()){
+                textBody = $(text).html();
+                $(text).html("<form id='update-text-form' method='post' action='/site/update-task-body' ><input type='hidden' name='id' value='"+id+"'><textarea name='body' id='bdt' class='task-text-textarea'>" + $(text).html() + "</textarea> <button type='button' onclick='updateTask($(this))' class='btn btn-primary save-btn'>Save</button> </form>");
+                textContainer = $('#update-text-form');
+                $("#update-text-form").children('#bdt').focus();
+            }
+        }
+        function updateStatus(status) {
+            var data = $(status).html() == 'No completed' ? 2 : 1;
+            var parent = $(status).closest('.item-task-body');
+            var id = $(parent).children('#id-task').html();
+            $.ajax({
+                type: 'POST',
+                data: {
+                    status: data,
+                    id: id
+                },
+                url: '/site/update-task-body',
+                success: function (data) {
+                }
+            });
+            $(status).html(data == 2 ? 'Completed' : 'No completed');
+        }
+    </script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
 </body>
 </html>

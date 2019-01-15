@@ -1,14 +1,15 @@
 <?php
 #Подключаем необходимые модели
-include $_SERVER['DOCUMENT_ROOT']."/application/models/User.php";
-include $_SERVER['DOCUMENT_ROOT']."/application/models/Task.php";
+include "application/models/User.php";
+include "application/models/Task.php";
 
 class SiteController extends Controller
 {
 	function actionIndex()
 	{
+
 	   # главный экшен рендера задач , дабы упростить код , я прохожу одним методом по своим задачам, есть гет и пост запросы
-        $model =  new Task;
+        $model = new Task;
         if($_GET['page']){
             $data = $model->getData(null,null,$_GET['page']);
             $this->view->generate('site.php', 'layout.php',$data);
@@ -44,7 +45,7 @@ class SiteController extends Controller
         header('Location: ../');
     }
     public function actionUpdateTaskBody(){
-    # формируем переменные и отправляем в модель для обновления задачи
+    # формируем переменные и отправляем в модель для создания задачи
         $id = $_POST['id'];
 	    if($_POST['status'])
 	        $status = $_POST['status'];

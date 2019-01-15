@@ -10,24 +10,20 @@ class Route
 	{
 		// контроллер и действие по умолчанию
 		$controller_name = 'Site';
-		$action_name = 'Index';
+		$action_name = 'index';
 		
 		$routes = explode('/', $_SERVER['REQUEST_URI']);
+
 		// получаем имя контроллера
 		if ( !empty($routes[1]) )
 		{
-			$controller_name = ucfirst ($routes[1]);
+			$controller_name = $routes[1];
 
 		}
 		// получаем имя экшена
 		if ( !empty($routes[2]) )
 		{
-			$action_name =  stristr($routes[2], '-')? str_replace('-','',$routes[2]) :$routes[2];
-            if(stristr($routes[2], '?')){
-                #Если есть Гет параметр то формируем его и обрезаем экшн
-                $str= strpos($routes[2], "?");
-                $action_name = substr($routes[2], 0, $str);
-
+		    if(stristr($routes[2], '?')){
                 $urlArr = explode('?',$routes[2]);
                 $routes[2] = $urlArr[0];
                 $getArr = explode('&',$urlArr[1]);
@@ -36,26 +32,28 @@ class Route
                     $_GET[$getStrArr[0]] = $getStrArr[1];
                 }
             }
+			$action_name =  stristr($routes[2], '-')? str_replace('-','',$routes[2]) :$routes[2];
 		}
 
 		// добавляем префиксы
-		$action_name = ucfirst($action_name);     
 		$model_name = 'User';
 		$controller_name = $controller_name.'Controller';
 		$action_name = 'action'.$action_name;
+
 		// подцепляем файл с классом контроллера
-		$controller_file = $controller_name.'.php';
-		$controller_path =  $_SERVER['DOCUMENT_ROOT']."/application/controllers/".$controller_file;
+		$controller_file = strtolower($controller_name).'.php';
+		$controller_path = "application/controllers/".$controller_file;
 		if(file_exists($controller_path))
 		{
-			include $controller_path;
+			include "application/controllers/".$controller_file;
             $controller = new $controller_name;
             $action = $action_name;
             // создаем контроллер
             if(method_exists($controller, $action))
-            // вызываем действие контроллера
+                // вызываем действие контроллера
                 $controller->$action();
-        }
+
+		}
 		else
 		{
 			/*

@@ -50,7 +50,7 @@ $pages = $data['pages'];
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12 text-center" ><h4 id="modal-email"></h4></div>
+                    <div class="col-md-12 text-center" id="modal-email"></div>
                     <div id="modal-task-body" class="col-7" class="text-center"></div>
                     <div id="modal-task-image" class="image-container col-5"></div>
                 </div>

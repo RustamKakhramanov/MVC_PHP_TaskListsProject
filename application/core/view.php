@@ -25,6 +25,6 @@ class View
 		внутри которого будет встраиваться вид
 		для отображения контента конкретной страницы.
 		*/
-		include $_SERVER['DOCUMENT_ROOT'].'/application/views/'.$template_view;
+		include 'application/views/'.$template_view;
 	}
 }

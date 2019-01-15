@@ -73,18 +73,18 @@ class Task extends  model{
 
                 $html .= '<div class="col-md-3 text-left task-text-container">';
                 if($_SESSION['role'] == 9)
-                    $html .= '<div class="task-text">'.$task['body'].'</div>';
+                    $html .= '<div class="task-text" onclick="taskText(this)">'.$task['body'].'</div>';
                 else
                     $html .= $task['body'];
                 $html .= '</div>';
                 $html .= '<div class="col-md-3 image"><img src="/uploads/img/tasks/'.$task['image'].'" alt=""></div>';
                 $status = $task['status'] == 1?"No completed":"Сompleted";
                 if($_SESSION['role'] && $_SESSION['role'] == 9)
-                    $html .= '<div class="col-md-2"><div class="update-status">'.$status.'</div></div>';
+                    $html .= '<div class="col-md-2"><div class="update-status" onclick="updateStatus(this)">'.$status.'</div></div>';
                 else
                     $html .= '<div class="col-md-2">'.$status.'</div>';
-            #из за того что скрипт в не инициализирует новые файлы пришлось немного закостылить, каждый раз переподключая скрипт, ведь нужно каждый раз редактировать если админ , а js не считывает если так не сделать 
-            $html .= '</div> <script type="text/javascript" src="/assets/js/main.js"></script>';
+            $html .= '</div>';
+
         }
         return $html;
     }

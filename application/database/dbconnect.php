@@ -1,8 +1,8 @@
 <?php
   $host = 'localhost';
-  $dbname = 'rustamnw_1';
-  $user = 'rustamnw_1';
-  $pass = '14uzusan';
+  $dbname = 'taskList';
+  $user = 'root';
+  $pass = '';
 
    try {
     $dsn = "mysql:host=$host;dbname=$dbname";
